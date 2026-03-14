@@ -1,1 +1,11 @@
 outputs
+
+# youtube cookies
+www.youtube.com_cookies.txt
+
+# claude
+.claude
+
+# test files
+video
+youtube-transcript-workspace

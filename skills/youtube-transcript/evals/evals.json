@@ -1,0 +1,43 @@
+{
+  "skill_name": "youtube-transcript",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "幫我把這個影片的文字內容抓下來：https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "expected_output": "擷取英文字幕，翻譯成台灣繁體中文，產生影片摘要，儲存為 video/2026-03-09_Rick_Astley_-_Never_Gonna_Give_You_Up*.md",
+      "files": [],
+      "assertions": [
+        {"id": "file_created", "text": "在 video/ 資料夾建立了 .md 檔案"},
+        {"id": "has_translation", "text": "Markdown 內容包含繁體中文翻譯"},
+        {"id": "has_video_link", "text": "Markdown 包含影片連結"},
+        {"id": "has_original_lang", "text": "Markdown 標註了原始語言（en）"},
+        {"id": "has_timestamps", "text": "包含含時間戳記的原文字幕區塊"},
+        {"id": "has_summary", "text": "Markdown 包含「## 摘要」區塊，且摘要內容非空白"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "這個 YouTube 影片有中文字幕嗎？如果有幫我存下來：https://www.youtube.com/watch?v=9bZkp7q19f0",
+      "expected_output": "偵測到影片語言，若有中文字幕則直接儲存；若無則抓取其他語言字幕並翻譯為繁體中文，包含摘要，儲存至 video/ 資料夾",
+      "files": [],
+      "assertions": [
+        {"id": "file_created", "text": "在 video/ 資料夾建立了 .md 檔案"},
+        {"id": "has_content", "text": "Markdown 包含實際字幕文字內容（非空白）"},
+        {"id": "has_summary", "text": "Markdown 包含「## 摘要」區塊，且摘要內容非空白"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "把 youtu.be/jNQXAC9IVRw 的字幕下載成 markdown 格式存到本地",
+      "expected_output": "偵測 YouTube 短網址，擷取字幕，翻譯（若為外文），產生摘要，儲存為 Markdown 至 video/ 資料夾",
+      "files": [],
+      "assertions": [
+        {"id": "file_created", "text": "在 video/ 資料夾建立了 .md 檔案"},
+        {"id": "short_url_resolved", "text": "正確解析了 youtu.be 短網址格式"},
+        {"id": "has_content", "text": "Markdown 包含實際字幕文字內容（非空白）"},
+        {"id": "has_translation_or_chinese", "text": "若為外文則有繁體中文翻譯，若為中文則直接呈現"},
+        {"id": "has_summary", "text": "Markdown 包含「## 摘要」區塊，且摘要內容非空白"}
+      ]
+    }
+  ]
+}
